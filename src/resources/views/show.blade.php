@@ -28,7 +28,9 @@
 </form>
 @endif
 <i class="fa-regular fa-comment"></i>
-<a href="#">購入手続きへ</a>
+@if($item->status !== 'sold')
+<a href="{{ route('purchase.create',$item->id) }}">購入手続きへ</a>
+@endif
 
 <h2>商品説明</h2>
 <p>{{ $item->description}}</p>
@@ -36,8 +38,10 @@
 <p>カテゴリー　{{ $item->category }}</p>
 <p>商品の状態　{{ $item->condition_label}}</p>
 <h2>コメント</h2>
-<img src="{{ $user->image_url }}" alt="ユーザープロフィール画像">
+@auth
+<img src="{{ asset($user->image_url) }}" alt="ユーザープロフィール画像">
 <p>{{ $user->name }}</p>
+@endauth
 
 @foreach($comments as $comment)
 <p>{{ $comment->content }}</p>

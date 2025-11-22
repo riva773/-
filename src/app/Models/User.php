@@ -15,6 +15,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'post_code',
+        'address',
+        'building,'
+
     ];
 
     protected $hidden = [
@@ -36,7 +40,13 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

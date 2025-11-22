@@ -34,6 +34,11 @@ class Item extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
     public const CONDITION_LABELS = [
         'like_new' => '良好',
         'good' => '目立った傷や汚れなし',

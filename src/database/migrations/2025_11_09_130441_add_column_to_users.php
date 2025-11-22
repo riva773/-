@@ -9,7 +9,7 @@ class AddColumnToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('post_code')->default('0000000');
+            $table->string('post_code', 7)->default('0000000');
             $table->string('address')->default('sample_address');
             $table->string('building')->nullable();
         });

@@ -6,12 +6,14 @@ use App\Http\Controllers\AuthItemsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\OrdersController;
 use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/item/{item_id}', [ItemsController::class, 'show'])->name('show');
 Route::get('/edit_profile', [UserController::class, 'edit_profile'])->name('edit_profile');
-Route::post('/update_profile',[UserController::class, 'update_profile'])->name('update_profile');
+Route::post('/update_profile', [UserController::class, 'update_profile'])->name('update_profile');
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -23,5 +25,9 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::post('/like', [LikesController::class, 'store'])->name('like');
     Route::post('/unlike', [LikesController::class, 'destroy'])->name('unlike');
-    Route::post('/comment',[CommentsController::class,'store'])->name('comment');
+    Route::post('/comment', [CommentsController::class, 'store'])->name('comment');
+    Route::get('/purchase/{item_id}', [PurchaseController::class, 'create'])->name('purchase.create');
+    Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editShippingAddress'])->name('edit_shipping_address');
+    Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateShippingAddress'])->name('edit_shipping_address');
+    Route::post('/store/{item_id}', [OrdersController::class, 'store'])->name('orders.store');
 });

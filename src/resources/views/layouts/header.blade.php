@@ -1,6 +1,7 @@
 <a href="{{ route('/') }}">
     <img src="{{ asset('images/dummy_logo.png') }}" alt="">
 </a>
+
 <input type="search" name="item-search" id="item-search" placeholder="なにをお探しですか？">
 
 @auth

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Like;
-use App\Models\User;
+use App\Models\Order;
 
 
 class ItemsController extends Controller
@@ -21,9 +20,10 @@ class ItemsController extends Controller
     {
         $user = Auth::user();
         $item = Item::where('id', $item_id)->first();
-        $liked = Like::where('item_id', $item_id)->where('user_id', $user->id)->exists();
+        $liked = auth()->check() ?
+            Like::where('item_id', $item_id)->where('user_id', $user->id)->exists()
+            : false;
         $comments = $item->comments()->with('user')->get();
-
         return view('show', compact('item', 'liked', 'user', 'comments'));
     }
 }
