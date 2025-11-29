@@ -17,6 +17,7 @@ class EditProfileRequest extends FormRequest
             'post_code' => ['required', 'digits:7'],
             'address' => ['required', 'string', 'max:255'],
             'building' => ['nullable', 'string', 'max:255'],
+            'image_url' => ['nullable'],
         ];
     }
 }

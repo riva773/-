@@ -9,11 +9,12 @@
     @csrf
     <button type="submit">ログアウト</button>
 </form>
+<a href="{{ route('profile') }}">マイページ</a>
+<a href="{{ route('sell') }}">出品</a>
 @endauth
 
 @guest
 <a href="{{ route('login') }}">ログイン</a>
+<a href="{{ route('login') }}">マイページ</a>
+<a href="{{ route('login') }}">出品</a>
 @endguest
-
-<a href="/mypage">マイページ</a>
-<a href="#">出品</a>

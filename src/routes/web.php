@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/item/{item_id}', [ItemsController::class, 'show'])->name('show');
-Route::get('/edit_profile', [UserController::class, 'edit_profile'])->name('edit_profile');
-Route::post('/update_profile', [UserController::class, 'update_profile'])->name('update_profile');
+
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -27,7 +26,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/unlike', [LikesController::class, 'destroy'])->name('unlike');
     Route::post('/comment', [CommentsController::class, 'store'])->name('comment');
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'create'])->name('purchase.create');
-    Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editShippingAddress'])->name('edit_shipping_address');
+
+    //送付先住所変更
+    Route::get(
+        '/purchase/address/{item_id}',
+        [PurchaseController::class, 'editShippingAddress']
+    )->name('edit_shipping_address');
     Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateShippingAddress'])->name('edit_shipping_address');
+
     Route::post('/store/{item_id}', [OrdersController::class, 'store'])->name('orders.store');
+
+    //プロフィール設定&編集
+    Route::get('/edit_profile', [UserController::class, 'edit_profile'])->name('edit_profile');
+    Route::post('/update_profile', [UserController::class, 'update_profile'])->name('update_profile');
+
+    Route::get('/mypage', [UserController::class, 'profile'])->name('profile');
+
+    Route::get('/sell', [ItemsController::class, 'create'])->name('sell');
+    Route::post('/sell', [ItemsController::class, 'store'])->name('sell.store');
 });

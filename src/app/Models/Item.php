@@ -18,6 +18,7 @@ class Item extends Model
         'condition',
         'category',
         'status',
+        'user_id',
     ];
     public function user()
     {

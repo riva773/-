@@ -21,13 +21,28 @@ class UserController extends Controller
     public function update_profile(EditProfileRequest $request)
     {
         $user = User::findOrFail(Auth::id());
-        $items = Item::all();
-        $user->update([
-            'name' => $request->name,
+
+        $data = [
+            'name'      => $request->name,
             'post_code' => $request->post_code,
-            'address' => $request->address,
-            'building' => $request->building,
-        ]);
-        return view('index', compact('user', 'items'));
+            'address'   => $request->address,
+            'building'  => $request->building,
+        ];
+
+        if ($request->hasFile('image_url')) {
+            $userImageName = $request->file('image_url')->getClientOriginalName();
+            $userImage = $request->file('image_url')->storeAs('user_image', $userImageName, 'public');
+            $data['image_url'] = $userImage;
+        }
+        $user->update($data);
+
+        return redirect()->route('profile');
+    }
+
+    public function profile()
+    {
+        $user = auth()->user();
+        $items = $user->items;
+        return view('auth/mypage', compact('user', 'items'));
     }
 }

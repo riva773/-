@@ -15,7 +15,7 @@ class ItemSeeder extends Seeder
         DB::table('items')->insert([
             [
                 'name' => '腕時計',
-                'image_url' => 'Armani+Mens+Clock.jpg',
+                'image_url' => 'item_image/Armani+Mens+Clock.jpg',
                 'brand' => 'armani',
                 'price' => 15000,
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
@@ -28,7 +28,7 @@ class ItemSeeder extends Seeder
             ],
             [
                 'name'        => 'HDD',
-                'image_url'   => 'HDD+Hard+Disk.jpg',
+                'image_url'   => 'item_image/HDD+Hard+Disk.jpg',
                 'brand'       => 'generic',
                 'price'       => 5000,
                 'description' => '高速で信頼性の高いハードディスク',
@@ -42,7 +42,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => '玉ねぎ3束',
-                'image_url'   => 'iLoveIMG+d.jpg',
+                'image_url'   => 'item_image/iLoveIMG+d.jpg',
                 'brand'       => null,
                 'price'       => 300,
                 'description' => '新鮮な玉ねぎ3束のセット',
@@ -56,7 +56,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => '革靴',
-                'image_url'   => 'Leather+Shoes+Product+Photo.jpg',
+                'image_url'   => 'item_image/Leather+Shoes+Product+Photo.jpg',
                 'brand'       => 'classic',
                 'price'       => 4000,
                 'description' => 'クラシックなデザインの革靴',
@@ -70,7 +70,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => 'ノートPC',
-                'image_url'   => 'Living+Room+Laptop.jpg',
+                'image_url'   => 'item_image/Living+Room+Laptop.jpg',
                 'brand'       => 'generic',
                 'price'       => 45000,
                 'description' => '高性能なノートパソコン',
@@ -84,7 +84,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => 'マイク',
-                'image_url'   => 'Music+Mic+4632231.jpg',
+                'image_url'   => 'item_image/Music+Mic+4632231.jpg',
                 'brand'       => 'generic',
                 'price'       => 8000,
                 'description' => '高音質のレコーディング用マイク',
@@ -98,7 +98,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => 'ショルダーバッグ',
-                'image_url'   => 'Purse+fashion+pocket.jpg',
+                'image_url'   => 'item_image/Purse+fashion+pocket.jpg',
                 'brand'       => 'basic',
                 'price'       => 3500,
                 'description' => 'おしゃれなショルダーバッグ',
@@ -112,7 +112,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => 'タンブラー',
-                'image_url'   => 'Tumbler+souvenir.jpg',
+                'image_url'   => 'item_image/Tumbler+souvenir.jpg',
                 'brand'       => 'basic',
                 'price'       => 500,
                 'description' => '使いやすいタンブラー',
@@ -126,7 +126,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => 'コーヒーミル',
-                'image_url'   => 'Tumbler+souvenir.jpg',
+                'image_url'   => 'item_image/Tumbler+souvenir.jpg',
                 'brand'       => 'manual',
                 'price'       => 4000,
                 'description' => '手動のコーヒーミル',
@@ -140,7 +140,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => 'メイクセット',
-                'image_url'   => '外出メイクアップセット.jpg',
+                'image_url'   => 'item_image/外出メイクアップセット.jpg',
                 'brand'       => null,
                 'price'       => 2500,
                 'description' => '便利なメイクアップセット',

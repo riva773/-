@@ -145,5 +145,5 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
-    'attributes' => ['post_code' => '郵便番号', 'address' => '住所', 'building' => '建物']
+    'attributes' => ['post_code' => '郵便番号', 'address' => '住所', 'building' => '建物', 'image_url' => '画像', 'category' => 'カテゴリー', 'name' => '名前', 'brand' => 'ブランド', 'description' => '説明', 'price' => '料金',]
 ];
