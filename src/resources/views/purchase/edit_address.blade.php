@@ -4,6 +4,13 @@
 @section('content')
 
 <h1>住所の変更</h1>
+@if($errors)
+@foreach($errors->all() as $error)
+<p style="color: red;">{{ $error}}</p>
+@endforeach
+@endif
+
+
 <form action="#" method="post">
     @csrf
     <label for="post_code">郵便番号</label>

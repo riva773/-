@@ -5,6 +5,11 @@
 <form action="{{ route('update_profile') }}" method="post" enctype="multipart/form-data">
     @csrf
     <h1>プロフィール設定</h1>
+    @if($errors)
+    @foreach($errors->all() as $error)
+    <p style="color: red;">{{ $error }}</p>
+    @endforeach
+    @endif
     <img src="{{ asset('storage/' . $user->image_url) }}" alt="プロフィール画像">
 
     <label for="image_url" class="image_upload_label">画像を選択する</label>

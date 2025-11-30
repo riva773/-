@@ -12,6 +12,11 @@
     <form action="{{ route('register') }}" method="post">
         @csrf
         <h1>会員登録</h1>
+        @if($errors)
+        @foreach($errors->all() as $error)
+        <p style="color: red;">{{ $error}}</p>
+        @endforeach
+        @endif
         <label for="name">ユーザー名</label>
         <input type="text" name="name" id="name">
         <label for="email">メールアドレス</label>

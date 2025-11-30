@@ -13,7 +13,7 @@ class EditProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable', 'string', 'max:55'],
+            'name' => ['required', 'string', 'max:55'],
             'post_code' => ['required', 'digits:7'],
             'address' => ['required', 'string', 'max:255'],
             'building' => ['nullable', 'string', 'max:255'],

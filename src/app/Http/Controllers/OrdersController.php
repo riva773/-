@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EditProfileRequest;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Order;
 
 class OrdersController extends Controller
 {
-    public function store(EditProfileRequest $request, $item_id)
+    public function store(OrderRequest $request, $item_id)
     {
         $item = Item::findOrFail($item_id);
         $user = auth()->user();

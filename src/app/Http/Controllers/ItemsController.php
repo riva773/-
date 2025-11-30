@@ -6,16 +6,31 @@ use App\Http\Requests\ListingItemRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Like;
+use Illuminate\Http\Request;
 
 
 
 
 class ItemsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::with('user')->get();
-        return view('index', compact('items'));
+
+        if (!auth()->check()) {
+            $items = Item::with('user')->get();
+            return view('index', compact('items'));
+        }
+
+        //マイリストボタンが押されたら、ログインしているユーザーがいいねしているアイテムだけの一覧を表示する
+        $query = Item::with('user');
+        if ($request->input('page') === 'mylist' && auth()->check()) {
+            $user = auth()->user();
+            $query->whereHas('likes', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        }
+        $items = $query->get();
+        return view('auth/index', compact('items'));
     }
 
     public function show($item_id)
@@ -37,7 +52,7 @@ class ItemsController extends Controller
     public function store(ListingItemRequest $request)
     {
         $itemImageName = $request->file('image_url')->getClientOriginalName();
-        $itemImageUrl = $request->file('image_url')->storeAs('item_image', $itemImageName,'public');
+        $itemImageUrl = $request->file('image_url')->storeAs('item_image', $itemImageName, 'public');
         $userId = auth()->id();
 
         Item::create([
@@ -53,5 +68,18 @@ class ItemsController extends Controller
         ]);
 
         return redirect()->route('/');
+    }
+
+    public function search(Request $request)
+    {
+        $query = Item::with('user');
+        $keyword = $request->input('keyword');
+        if (!empty($keyword)) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'LIKE', "%{$keyword}%")->orWhere('description', 'LIKE', "%{$keyword}%");
+            });
+        }
+        $items = $query->get();
+        return view('index', compact('items'));
     }
 }

@@ -4,7 +4,14 @@
 @if(session('success'))
 <p>{{ session('success') }}</p>
 @endif
-<img src="{{ asset("images/{$item->image_url}") }}" alt="商品画像">
+
+@if($errors)
+@foreach($errors->all() as $error)
+<p style="color: red;">{{ $error}}</p>
+@endforeach
+@endif
+
+<img src="{{ asset("storage/{$item->image_url}") }}" alt="商品画像">
 <h1>{{ $item->name }}</h1>
 <p>{{ $item->brand }}</p>
 <p>{{ $item->price }}(税込)</p>
@@ -39,7 +46,7 @@
 <p>商品の状態　{{ $item->condition_label}}</p>
 <h2>コメント</h2>
 @auth
-<img src="{{ asset($user->image_url) }}" alt="ユーザープロフィール画像">
+<img src="{{ asset('storage/user_image/' . $user->image_url) }}" alt="ユーザープロフィール画像">
 <p>{{ $user->name }}</p>
 @endauth
 

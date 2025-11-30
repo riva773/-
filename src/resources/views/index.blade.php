@@ -7,12 +7,11 @@
 @section('content')
 <div class="container">
     <p>おすすめ</p>
-    <p>マイリスト</p>
     <div class="item-container">
         @foreach($items as $item)
         <a href="{{ route('show',$item->id) }}">
             <div class="item-card">
-                <img src="{{ asset('storage/item_image/' . $item->image_url) }}" alt="商品画像">
+                <img src="{{ asset('storage/' . $item->image_url) }}" alt="商品画像">
                 <p class="item-name">{{$item->name}}</p>
                 @if($item->status == 'sold')
                 <p>sold</p>

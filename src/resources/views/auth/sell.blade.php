@@ -30,7 +30,6 @@
     </label>
     <label>
         <input type="radio" name="category" value="ladies">
-        レディース
     </label>
     <label>
         <input type="radio" name="category" value="mens">

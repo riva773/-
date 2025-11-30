@@ -12,6 +12,11 @@
         @csrf
         @include('layouts.simple_header')
         <h1>ログイン</h1>
+        @if($errors)
+        @foreach($errors->all() as $error)
+        <p style="color: red">{{ $error}}</p>
+        @endforeach
+        @endif
         <label for="email">メールアドレス</label>
         <input type="email" name="email" id="email">
         <label for="password">パスワード</label>

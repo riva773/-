@@ -9,8 +9,8 @@
     @if(session('success'))
     <p>{{ session('success') }}</p>
     @endif
-    <p>おすすめ</p>
-    <p>マイリスト</p>
+    <a href="{{ route('/') }}">おすすめ</a>
+    <a href="{{ route('/',['page' => 'mylist']) }}">マイリスト</a>
     <div class="item-container">
         @foreach($items as $item)
         <a href="{{ route('show',['item_id' => $item->id]) }}">

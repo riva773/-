@@ -39,10 +39,20 @@ class UserController extends Controller
         return redirect()->route('profile');
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
+
+        $query = Item::with('user');
         $user = auth()->user();
-        $items = $user->items;
+        if ($request->input('page') === 'purchased' && auth()->check()) {
+            $query->whereHas('order', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        } else {
+            $query->where('user_id', $user->id);
+        }
+        //$itemsは、クエリパラメータがpurchasedなら購入した商品のみ
+        $items = $query->get();
         return view('auth/mypage', compact('user', 'items'));
     }
 }

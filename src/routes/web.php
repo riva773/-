@@ -14,12 +14,9 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/item/{item_id}', [ItemsController::class, 'show'])->name('show');
 
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return app(AuthItemsController::class)->index();
-    }
-    return app(ItemsController::class)->index();
-})->name('/');
+Route::get('/', [ItemsController::class, 'index'])->name('/');
+
+Route::post('/search', [ItemsController::class, 'search'])->name('search');
 
 Route::middleware('auth')->group(function () {
     Route::post('/like', [LikesController::class, 'store'])->name('like');
@@ -34,12 +31,14 @@ Route::middleware('auth')->group(function () {
     )->name('edit_shipping_address');
     Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateShippingAddress'])->name('edit_shipping_address');
 
+    //商品購入
     Route::post('/store/{item_id}', [OrdersController::class, 'store'])->name('orders.store');
 
     //プロフィール設定&編集
-    Route::get('/edit_profile', [UserController::class, 'edit_profile'])->name('edit_profile');
+    Route::get('/mypage/profile', [UserController::class, 'edit_profile'])->name('edit_profile');
     Route::post('/update_profile', [UserController::class, 'update_profile'])->name('update_profile');
 
+    //マイページ
     Route::get('/mypage', [UserController::class, 'profile'])->name('profile');
 
     Route::get('/sell', [ItemsController::class, 'create'])->name('sell');

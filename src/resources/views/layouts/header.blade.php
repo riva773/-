@@ -1,8 +1,13 @@
 <a href="{{ route('/') }}">
-    <img src="{{ asset('images/dummy_logo.png') }}" alt="">
+    <img src="{{ asset('storage/item_image/' . 'dummy_logo.png') }}" alt="ロゴ画像">
 </a>
 
-<input type="search" name="item-search" id="item-search" placeholder="なにをお探しですか？">
+<form action="{{ route('search') }}" method="post">
+    @csrf
+    <input type="search" name="keyword" id="keyword" placeholder="なにをお探しですか？">
+    <button type="submit" style="display: none;"></button>
+</form>
+<a href="{{ route('/') }}" style="background-color: lightgray; text-decoration: none">検索をクリア</a>
 
 @auth
 <form action="{{ route('logout') }}" method="post">

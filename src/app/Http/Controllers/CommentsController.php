@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Comment;
@@ -11,7 +12,7 @@ use App\Models\Comment;
 
 class CommentsController extends Controller
 {
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
         $user = Auth::user();
         $itemId = $request->item_id;
