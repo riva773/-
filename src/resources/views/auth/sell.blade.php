@@ -29,9 +29,6 @@
         インテリア
     </label>
     <label>
-        <input type="radio" name="category" value="ladies">
-    </label>
-    <label>
         <input type="radio" name="category" value="mens">
         メンズ
     </label>

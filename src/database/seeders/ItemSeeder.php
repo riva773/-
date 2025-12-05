@@ -22,7 +22,7 @@ class ItemSeeder extends Seeder
                 'condition' => 'like_new',
                 'category' => 'fashion',
                 'status' => 'Available',
-                'user_id' => 1,
+                'user_id' => $userId,
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],
@@ -126,7 +126,7 @@ class ItemSeeder extends Seeder
 
             [
                 'name'        => 'コーヒーミル',
-                'image_url'   => 'item_image/Tumbler+souvenir.jpg',
+                'image_url'   => 'item_image/Waitress+with+Coffee+Grinder.jpg',
                 'brand'       => 'manual',
                 'price'       => 4000,
                 'description' => '手動のコーヒーミル',

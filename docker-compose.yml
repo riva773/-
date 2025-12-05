@@ -11,6 +11,9 @@ services:
       - ./src:/var/www/
     depends_on:
       - php
+    environment:
+      CLIENT_MAX_BODY_SIZE: 10M
+
 
   php:
     build: ./docker/php
