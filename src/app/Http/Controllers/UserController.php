@@ -12,15 +12,17 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function edit_profile()
+    public function edit_profile(Request $request)
     {
+        $isFirst = $request->routeIs('profile_first');
         $user = User::findOrFail(auth()->id());
-        return view('auth/profile', compact('user'));
+        return view('auth/profile', compact('user', 'isFirst'));
     }
 
     public function update_profile(EditProfileRequest $request)
     {
         $user = User::findOrFail(Auth::id());
+        $isFirst = $request->isFirst;
 
         $data = [
             'name'      => $request->name,
@@ -35,6 +37,10 @@ class UserController extends Controller
             $data['image_url'] = $userImage;
         }
         $user->update($data);
+
+        if ($isFirst === 'profile_first') {
+            return redirect()->route('/');
+        }
 
         return redirect()->route('profile');
     }

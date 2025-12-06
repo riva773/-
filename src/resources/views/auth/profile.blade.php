@@ -33,6 +33,7 @@
 
     <label for="building">建物名</label>
     <input type="text" name="building" id="building" value="{{ old('building',$user->building) }}">
+    <input type="hidden" name="isFirst" id="isFirst" value="{{ $isFirst ? 'profile_first' : '' }}">
 
     <button type="submit">更新する</button>
 </form>

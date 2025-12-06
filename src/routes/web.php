@@ -18,7 +18,12 @@ Route::get('/', [ItemsController::class, 'index'])->name('/');
 
 Route::post('/search', [ItemsController::class, 'search'])->name('search');
 
-Route::middleware('auth')->group(function () {
+//プロフィール設定&編集
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile/first', [UserController::class, 'edit_profile'])->name('profile_first');
+    Route::get('/mypage/profile', [UserController::class, 'edit_profile'])->name('edit_profile');
+    Route::post('/update_profile', [UserController::class, 'update_profile'])->name('update_profile');
+
     Route::post('/like', [LikesController::class, 'store'])->name('like');
     Route::post('/unlike', [LikesController::class, 'destroy'])->name('unlike');
     Route::post('/comment', [CommentsController::class, 'store'])->name('comment');
@@ -34,12 +39,9 @@ Route::middleware('auth')->group(function () {
     //商品購入
     Route::post('/store/{item_id}', [OrdersController::class, 'store'])->name('orders.store');
 
-    //プロフィール設定&編集
-    Route::get('/mypage/profile', [UserController::class, 'edit_profile'])->name('edit_profile');
-    Route::post('/update_profile', [UserController::class, 'update_profile'])->name('update_profile');
-
     //マイページ
     Route::get('/mypage', [UserController::class, 'profile'])->name('profile');
+
 
     Route::get('/sell', [ItemsController::class, 'create'])->name('sell');
     Route::post('/sell', [ItemsController::class, 'store'])->name('sell.store');
