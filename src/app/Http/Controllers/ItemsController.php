@@ -15,20 +15,42 @@ class ItemsController extends Controller
 {
     public function index(Request $request)
     {
+        if ($request->has('clear')) {
+            session()->forget('search_keyword');
+        }
+        $query = Item::with('user');
+        $keyword = session()->get('search_keyword');
 
+        //ログインしていない場合
         if (!auth()->check()) {
-            $items = Item::with('user')->get();
+            //マイリスト機能はない
+            //検索がある時
+            if ($keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('name', 'LIKE', "%{$keyword}%")
+                        ->orWhere('description', 'LIKE', "%{$keyword}%");
+                });
+            }
+            $items = $query->get();
             return view('index', compact('items'));
         }
 
-        //マイリストボタンが押されたら、ログインしているユーザーがいいねしているアイテムだけの一覧を表示する
-        $query = Item::with('user');
+        //ログインしている場合
+        //検索キーワードがある場合
+        if (!empty($keyword)) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'LIKE', "%{$keyword}%")
+                    ->orWhere('description', 'LIKE', "%{$keyword}%");
+            });
+        }
+        //マイリストの場合
         if ($request->input('page') === 'mylist' && auth()->check()) {
             $user = auth()->user();
             $query->whereHas('likes', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             });
         }
+
         $items = $query->get();
         return view('auth/index', compact('items'));
     }
@@ -72,14 +94,18 @@ class ItemsController extends Controller
 
     public function search(Request $request)
     {
-        $query = Item::with('user');
+        //送られてきたキーワードを保存
         $keyword = $request->input('keyword');
+
+        //もし検索ワードがあったらsessionとして保存
+        //空文字での検索ならsessionを削除
         if (!empty($keyword)) {
-            $query->where(function ($q) use ($keyword) {
-                $q->where('name', 'LIKE', "%{$keyword}%")->orWhere('description', 'LIKE', "%{$keyword}%");
-            });
+            session()->put('search_keyword', $keyword);
+        } else {
+            session()->forget('search_keyword');
         }
-        $items = $query->get();
-        return view('index', compact('items'));
+
+        //検索機能も含めてindexで処理する
+        return redirect()->route('/');
     }
 }

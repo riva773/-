@@ -7,7 +7,7 @@
     <input type="search" name="keyword" id="keyword" placeholder="なにをお探しですか？">
     <button type="submit" style="display: none;"></button>
 </form>
-<a href="{{ route('/') }}" style="background-color: lightgray; text-decoration: none">検索をクリア</a>
+<a href="{{ route('/',['clear' => 1]) }}" style="background-color: lightgray; text-decoration: none">検索をクリア</a>
 
 @auth
 <form action="{{ route('logout') }}" method="post">
