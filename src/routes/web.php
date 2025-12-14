@@ -38,6 +38,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //商品購入
     Route::post('/store/{item_id}', [OrdersController::class, 'store'])->name('orders.store');
+    Route::get('/order/success', [OrdersController::class, 'success'])->name('order.success');
+    Route::get('/order/cancel', [OrdersController::class, 'cancel'])->name('order.cancel');
 
     //マイページ
     Route::get('/mypage', [UserController::class, 'profile'])->name('profile');
